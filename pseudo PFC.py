@@ -5,7 +5,7 @@
 #On admet une fonction input qui renvoie l'entrer du joueur
 #Je definis la liste score qui comprend [0,0]
 
-#Je definis une list coups qui comprend "Pierre", "Feuille", "Ciseau"
+#Je definis une list coups qui comprend "pierre", "feuille", "ciseau"
 
 #je definis un fonction machineAléatoire
     # je definis RandInt le retour de l'execution de la fonction random
@@ -18,7 +18,7 @@
 
     #Je definis coupJoueur avec le retour de l'execution de la fonction input
 
-    #Si coupJoueur est égal a coupMachine
+    #Sinon si coupJoueur est égal a coupMachine
         #alors ecrire"La machine a aussi jouer" coupMachine " c'est une egaliter."
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
         #Si rejouez est egal a "oui" 
@@ -26,7 +26,7 @@
         #Sinon 
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
-    #Si coupJoueur est egal a "Pierre" ET coupMachine est egal a "Ciseau"
+    #Sinon si coupJoueur est egal a "pierre" ET coupMachine est egal a "ciseau"
         #ALors ecrire"La machine a choisi" coupMachine "tu as gagner !"
         #assigner a score[0] +1
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
@@ -35,7 +35,7 @@
         #Sinon 
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
-    #Si coupJoueur est egal a "Feuille" ET coupMachine est egal a "Pierre"
+    #Sinon si coupJoueur est egal a "feuille" ET coupMachine est egal a "pierre"
         #ALors ecrire"La machine a choisi" coupMachine "tu as gagner !"
         #assigner a score[0] +1
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
@@ -44,7 +44,7 @@
         #Sinon 
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
-    #Si coupJoueur est egal a "Ciseau" ET coupMachine est egal a "Feuille"
+    #Sinon si coupJoueur est egal a "ciseau" ET coupMachine est egal a "feuille"
         #ALors ecrire"La machine a choisi" coupMachine "tu as gagner !"
         #assigner a score[0] +1
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
@@ -54,7 +54,7 @@
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
 
-    #Si coupMachine est egal a "Pierre" ET coupJoueur est egal a "Ciseau"
+    #Sinon si coupMachine est egal a "pierre" ET coupJoueur est egal a "ciseau"
         #ALors ecrire"La machine a choisi" coupMachine "tu as perdu ..."
         #assigner a score[1] +1
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
@@ -63,7 +63,7 @@
         #Sinon 
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
-    #Si coupMachine est egal a "Feuille" ET coupJoueur est egal a "Pierre"
+    #Sinon si coupMachine est egal a "feuille" ET coupJoueur est egal a "pierre"
         #ALors ecrire"La machine a choisi" coupMachine "tu as perdu ..."
         #assigner a score[1] +1
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
@@ -72,7 +72,7 @@
         #Sinon 
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
-    #Si coupMachine est egal a "Ciseau" ET coupJoueur est egal a "Feuille"
+    #Sinon si coupMachine est egal a "ciseau" ET coupJoueur est egal a "feuille"
         #ALors ecrire"La machine a choisi" coupMachine "tu as perdu ..."
             #assigner a score[1] +1
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
@@ -82,7 +82,7 @@
             #alors ecrire "tu as "score[0] "la machine a " score[1]
 
     #Sinon 
-        #ecrire "verifie l'orthographe s'il te plait, il faut ecrire tel que" coups
+        #ecrire "verifie l'orthographe s'il te plait, il faut ecrire tel que pierre, feuille, ciseau "
         #assigner a rejouez l'execution de la fonction input "Voulez vous rejouez ? [oui/non] : "
         #Si rejouez est egal a "oui" 
             #alors j'execute PierreFeuilleCiseau en rappelant la fonction machineAléatoire et en utilisant le nouveau score
