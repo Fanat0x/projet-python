@@ -6,18 +6,22 @@ matrix=[[0,0,0],[0,0,0],[0,0,0]]
 player=[]
 
 def draw(matrix):
+    print("---------")
     for i in range(len(matrix)):
         print (matrix[i])
+    print("---------\n")
 
 def is_board_filled(matrix):
     count=0
-    for i in range(matrix):
-         if i==0:        
-            count=count+1
+    for row in (matrix):
+        for tile in row:    
+            if tile==0:        
+                count=count+1
     return count
 
 def verify(matrix):
 
+    allo = is_board_filled(matrix)
     if matrix[0][0]==1 and matrix[0][1]==1 and matrix[0][2]==1:
         return "win"
     elif matrix[1][0]==1 and matrix[1][1]==1 and matrix[1][2]==1:
@@ -41,22 +45,21 @@ def verify(matrix):
         return "win"
     elif matrix[2][0]==2 and matrix[2][1]==2 and matrix[2][2]==2:
         return "win"
-    elif matrix[0][0]==1 and matrix[1][0]==2 and matrix[2][0]==2:
+    elif matrix[0][0]==2 and matrix[1][0]==2 and matrix[2][0]==2:
         return "win"
-    elif matrix[0][1]==1 and matrix[1][1]==2 and matrix[2][1]==2:
+    elif matrix[0][1]==2 and matrix[1][1]==2 and matrix[2][1]==2:
         return "win"
-    elif matrix[0][2]==1 and matrix[1][2]==2 and matrix[2][2]==2:
+    elif matrix[0][2]==2 and matrix[1][2]==2 and matrix[2][2]==2:
         return "win"
     elif matrix[0][0]==2 and matrix[1][1]==2 and matrix[2][2]==2:
         return "win"
     elif matrix[2][0]==2 and matrix[1][1]==2 and matrix[0][2]==2:
         return "win"
-
-    allo=is_board_filled(matrix)
-
-
     elif allo==9 :
         return "draw"
+
+    else:
+        return True
 
         
     
@@ -92,42 +95,60 @@ def action(player_type):
 
 def morpion(matrix):
     game=False
-    gamee=input("voulez-vous jouez ?(oui/non) : ")
-    if gamee=="oui":
+    game_e=input("voulez-vous jouez ?(oui/non) : ")
+    if game_e=="oui":
         game=True
         pseudo_a=input("Bonjour veuillez inserer le pseudo d'un premier joueur : ")
         player.append(pseudo_a)
         pseudo_b=input("Bonjour veuillez inserer le pseudo d'un deuxieme joueur : ")
         player.append(pseudo_b)
+        print("\n")
         random.shuffle(player)
-    elif gamee=="non":
+    elif game_e=="non":
+        game=False
         print("appuyer sur F5 pour relancer le jeu")
     else:
         print("Veuillez verifiez l'orthographe")
+        morpion(matrix)
 
+    player_turn=0
     while game==True:
+        player_turn=player_turn+1
         condition=""
-        print("c'est a",player[0],"de jouez ")
-        condition=action(1)
-        verify(matrix)
-        draw(matrix)
-        if condition=="win":
-            game=False
-            print(player[0], " a gagner")
 
-        print("c'est a ",player[1],"de jouez ")
-        condition=action(2)
-        verify(matrix)
-        draw(matrix)
-        if condition=="win":
-            game=False
-            print(player[1], " a gagner")
+        if (player_turn%2)==0:
+            print("C'est a",player[0],"de jouez ")
+            action(1)
+            condition=verify(matrix)
+            draw(matrix)
+            if condition=="win":
+                game=False
+                print(player[0], "a gagner\n")
 
-        if condition=="draw":
-            game=False
-            print("c'est une egaliter le tableau est plein !")
-            
-    
+            elif condition=="draw":
+                game=False
+                print("c'est une egaliter le tableau est plein !\n")
+
+
+        if (player_turn%2)==1:
+            print("C'est a",player[1],"de jouez ")
+            action(2)
+            condition=verify(matrix)
+            draw(matrix)
+            if condition=="win":
+                game=False
+                print(player[1], "a gagner\n")
+
+            elif condition=="draw":
+                game=False
+                print("c'est une egaliter le tableau est plein !\n")
+
+    game_e=input("voulez-vous rejouez ?(oui/non) : ") 
+    if game_e=="oui":
+        morpion(matrix)
+    else: 
+        print("au revoir\n")
+        
 
 
 
