@@ -458,6 +458,7 @@ def morpion(matrix):
     if game_e=="oui":
         reinit_matrix(matrix)
         CPU_possibility=0
+        random.shuffle(player)
         #alors je relance la fonction morpion avec matric en argument
         morpion(matrix)
     #sinon
