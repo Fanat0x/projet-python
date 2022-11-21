@@ -1,6 +1,7 @@
 #DEBUT
 
 import random
+import tkinter
 
 #Je définis une matrice en 3 par 3
 matrix=[[0,0,0],[0,0,0],[0,0,0]]
@@ -134,6 +135,9 @@ def draw(matrix):
         print (matrix[i])
         #Mise en forme
     print("---------\n")
+
+
+    
 
 #Je definis une fonction qui vérifie si le le tableau est remplie
 def is_board_filled(matrix):
