@@ -149,3 +149,12 @@ class Laby:
         self.map()
         self.draw()
         self.fen.mainloop()
+
+
+
+## autres page 
+from tkinter import *
+from laby_map import *
+
+if __name__=="__main__":
+    game=Game(flag=0)
