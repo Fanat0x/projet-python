@@ -1,0 +1,151 @@
+class Game:
+    def __init__(self,flag):
+        if flag==0 :
+            laby0=Laby("map0.txt",Tk,"portal")
+            laby0.run()
+        if flag==1 :
+            laby1=Laby("map1.txt",Toplevel,"end")
+            laby1.run()
+
+
+class Laby:
+    def __init__(self,mapx,Tk,portal):
+        self.fen=Tk()
+        self.titre=self.fen.title("labyrinth")
+        self.size=self.fen.configure(width="1200",height="900")
+        self.modification=self.fen.resizable(width=True, height=True)
+
+        self.laby=[]
+        with open(mapx, "r") as f :
+            l=f.readlines()
+            for e in l:
+                self.laby.append(list(e.replace('\n','')))
+            for r in range(len(self.laby)):
+                for l in range(len(self.laby[r])):
+                    self.laby[r][l]=int(self.laby[r][l])
+
+        self.player=[0,0]
+        self.start=[15,1]
+        self.portal=[15,38]
+
+        if portal=="portal":
+            self.portal_value=4
+            self.start_image=PhotoImage(file="start.png")
+            self.finish_image=PhotoImage(file="finish.png")
+        if portal=="end":
+            self.portal_value=5
+            self.start_image=PhotoImage(file="finish.png")
+            self.finish_image=PhotoImage(file="end.png")
+
+
+        self.fen.bind('<Right>',lambda x: self.mouv(x=0))
+        self.fen.bind('<d>',lambda x: self.mouv(x=0))
+        self.fen.bind('<Left>',lambda x: self.mouv(x=1))
+        self.fen.bind('<q>',lambda x: self.mouv(x=1))
+        self.fen.bind('<Up>' ,lambda x: self.mouv(x=2))
+        self.fen.bind('<z>',lambda x: self.mouv(x=2))
+        self.fen.bind('<Down>',lambda x: self.mouv(x=3))
+        self.fen.bind('<s>',lambda x: self.mouv(x=3))
+        self.fen.bind('<Escape>', lambda x : self.echap())
+
+
+    def map(self):
+
+        self.Map = Canvas(self.fen,width=1200,height=900)
+        self.Map.place(x = 0, y =0 )
+        return self.Map
+
+
+    def mouv(self,x):
+
+        if x==0 and self.laby[self.player[0]][self.player[1]+1]!=1:
+            self.laby[self.player[0]][self.player[1]]=0
+            self.player[1]+=1
+            self.draw()
+
+        if x==1 and self.laby[self.player[0]][self.player[1]-1]!=1:
+            self.laby[self.player[0]][self.player[1]]=0
+            self.player[1]-=1
+            self.draw()
+
+        if x==2 and self.laby[self.player[0]-1][self.player[1]]!=1:
+            self.laby[self.player[0]][self.player[1]]=0
+            self.player[0]-=1
+            self.draw()
+
+        if x==3 and self.laby[self.player[0]+1][self.player[1]]!=1:
+            self.laby[self.player[0]][self.player[1]]=0
+            self.player[0]+=1
+            self.draw()
+
+        if self.laby[self.player[0]][self.player[1]]==4:
+            self.fen.iconify()
+            game=Game(flag=1)
+
+        if self.laby[self.player[0]][self.player[1]]==5:
+            self.win()
+
+
+    def win(self):
+        if messagebox.askyesno("VOUS AVEZ GAGNER !!!","Voulez vous relancez une partie ?", default="yes"):
+            self.fen.destroy()
+            game=Game(flag=0)
+
+        else :
+            quit()
+
+
+    def echap(self):
+        if messagebox.askyesno("Attention !","Voulez vous vraiment quitter le jeu ?",default="no"):
+            quit()
+
+
+    def draw(self):
+        self.mur_image=PhotoImage(file="mur.png")
+        self.player_image=PhotoImage(file="player.png")
+        self.path_image=PhotoImage(file="path.png")
+        self.Map.delete('all')
+        self.laby[self.player[0]][self.player[1]]=2
+        self.laby[self.start[0]][self.start[1]]=3
+        self.laby[self.portal[0]][self.portal[1]]=self.portal_value
+
+        y=0
+        y-=1
+        for row in self.laby :
+            x=0
+
+            for tile in row:
+                if tile==0:
+                    self.Map.create_image(x*30+15,y*30+15, image=self.path_image)
+                    x+=1
+
+                if tile==1:
+                    self.Map.create_image(x*30+15,y*30+15, image=self.mur_image)
+                    x+=1
+
+                if tile==2:
+                    self.Map.create_image(x*30+15,y*30+15, image=self.player_image)
+                    x+=1
+
+                if tile==3:
+                    self.Map.create_image(x*30+15,y*30+15, image=self.start_image)
+                    x+=1
+
+                if tile==4:
+                    self.Map.create_image(x*30+15,y*30+15, image=self.finish_image)
+                    x+=1
+
+                if tile==5:
+                    self.Map.create_image(x*30+15,y*30+15, image=self.finish_image)
+                    x+=1
+
+
+            y+=1
+
+
+    def run(self):
+        self.player[0]=self.start[0]
+        self.player[1]=self.start[1]
+        self.map()
+        self.draw()
+        self.fen.mainloop()
