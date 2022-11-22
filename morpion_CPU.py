@@ -37,7 +37,9 @@ def bot(grille,bot_type,human_type):
         grille[idxPlayerWin[0]][idxPlayerWin[1]] = bot_type
     elif CPU_possibility == 2:
         print(CPU_possibility)
-        if grille[0][1] == 0:
+        if deuxParmiQuatre(grille, human_type) == True:
+            grille[0][2] = bot_type
+        elif grille[0][1] == 0:
             grille[0][1] = bot_type
         else:
             grille[1][0] = bot_type
@@ -57,6 +59,17 @@ def bot(grille,bot_type,human_type):
             grille[2][1] = bot_type
     
     return grille
+
+def deuxParmiQuatre(grille, frm):
+    if grille[0][1] == grille[1][2] == frm and grille[2][1] == grille[1][0] == 0:
+        return True
+    elif grille[1][2] == grille[2][1] == frm and grille[1][0] == grille[0][1] == 0:
+        return True
+    elif grille[2][1] == grille[1][0] == frm and grille[0][1] == grille[1][2] == 0:
+        return True
+    elif grille[1][0] == grille[0][1] == frm and grille[1][2] == grille[2][1] == 0:
+        return True
+    return False
 
 def deuxParmiTrois(a, b, c, player):
     if a == b == player and c == 0:
@@ -326,6 +339,7 @@ def action_CPU(player_type,coup):
 
 #Je definis la fonction morpions qui prend 1 argument matrice. 
 def morpion(matrix):
+    global CPU_possibility
     reinit_matrix(matrix)
     #Je definis game un booleens qui est Faux 
     game=False
@@ -461,7 +475,7 @@ def morpion(matrix):
     #Si l'entrer terminal vaut "oui"
     if game_e=="oui":
         reinit_matrix(matrix)
-        CPU_possibility=0
+        CPU_possibility = 1
         random.shuffle(player)
         #alors je relance la fonction morpion avec matric en argument
         morpion(matrix)

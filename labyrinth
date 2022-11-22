@@ -154,7 +154,6 @@ class Laby:
 
 ## autres page 
 from tkinter import *
-from laby_map import *
 
 if __name__=="__main__":
     game=Game(flag=0)
